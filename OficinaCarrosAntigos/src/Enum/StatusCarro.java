@@ -1,7 +1,6 @@
 package src.Enum;
 public enum StatusCarro {
-    EM_ANDAMENTO,
+    RECEBIDO,
     PRONTO,
-    AGUARDANDO_PECAS,
-    EM_RESTAURACAO
+    EM_RESTAURACAO;
 }

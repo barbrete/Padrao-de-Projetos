@@ -1,6 +1,5 @@
-package src.Model;
+package src.model;
 import java.time.LocalDate;
-
 import src.Enum.StatusCarro;
 
 public class Carro {
@@ -10,14 +9,30 @@ public class Carro {
     private int ano;
     private String placa;
     private StatusCarro status;
+    private Cliente dono;
     private static int TotalCarros;
 
-    public Carro(String marca, String modelo, int ano, String placa, StatusCarro status) {
+    @Override
+    public String toString() {
+        return  "marca: " + marca + 
+                "\nmodelo: " + modelo + 
+                "\nano: " + ano +
+                "\nplaca: " + placa + 
+                "\nstatus: " + status +
+                "\nInformações do Cliente = " + dono.apresentacao();
+                
+    }
+
+    public Carro() {
+    }
+
+    public Carro(String marca, String modelo, int ano, String placa, Cliente dono) {
         this.marca = marca;
+        this.dono = dono;
         this.modelo = modelo;
         this.ano = ano;
         this.placa = placa;
-        this.status = status;
+        this.status = StatusCarro.RECEBIDO;
         Carro.TotalCarros ++;
     }
     
@@ -52,29 +67,29 @@ public class Carro {
     public void setStatus(StatusCarro status) {
         this.status = status;
     }
+    public Cliente getDono() {
+        return dono;
+    }
+
+    public void setDono(Cliente dono) {
+        this.dono = dono;
+    }
     public static int getTotalContas() { 
         return TotalCarros;
     }
 
-    @Override
-    public String toString() {
-        return "Carro [marca=" + marca + ", modelo=" + modelo + ", ano=" + ano + ", placa=" + placa + ", status="
-                + status + "]";
-    }
-
-    public boolean VerificaSeCarroEClassico(int ano){
+    public static boolean VerificaSeCarroEClassico(int ano){
         LocalDate dataAtual = LocalDate.now();
 
         int anoAtual = dataAtual.getYear();
         int diferenca = anoAtual - ano;
 
         if (diferenca < 30){
-            return true;
-        }
-        else{
             return false;
         }
+        else{
+            return true;
+        }
     }
-
 
 }
